@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="SpritzDemo">
+<html lang="en" ng-app="SprinkleDemo">
 	<head>
 		<meta charset="UTF-8">
 		<title>Spritz Demo</title>
-		<link rel="stylesheet" type="text/css" href="spritz.css" />
+		<link rel="stylesheet" type="text/css" href="dist/sprinkle.css" />
 		<script src="bower_components/angular/angular.js"></script>
-		<script src="spritz.js"></script>
+		<script src="dist/sprinkle-tpls.js"></script>
 		<script src="index.js"></script>
 	</head>
 	<body ng-controller="MainController">
-		<mnd-spritz text="{{text}}" wpm="{{wpm}}"></mnd-spritz>
+		<div mnd-sprinkle text="{{text}}" wpm="{{wpm}}"></div>
 	</body>
 </html>

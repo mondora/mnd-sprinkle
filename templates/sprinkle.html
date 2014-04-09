@@ -1,28 +1,19 @@
-<div id="spray_container">
-	<div id="guide_top">
-		――――――――――<span id="notch">&#1092;</span>―――――――――――
-	</div>
-	<div id="spray_result">
-		<span class="invisible">
-			{{word.leftPadding}}
+<div class="spray-container">
+	<div class="spray-result">
+		<span class="spray-left">
+			&nbsp;
+			{{word.left}}
 		</span>
-		<span class="spray_start">
-			{{word.leftHand}}
+		<span class="spray-pivot">
+			{{word.pivot}}
 		</span>
-		<span class="spray_pivot">
-			{{word.pivotLetter}}
+		<span class="spray-right">
+			{{word.right}}
 		</span>
-		<span class="spray_end">
-			{{word.rightHand}}
-		</span>
-		<span class="invisible">
-			{{word.rightPadding}}
-		</span>
-	</div>
-	<div id="guide_bottom">
-		――――――――――――――――――――――
 	</div>
 </div>
+<br />
+<br />
 <br />
 <button ng-click="start()">Start</button>
 <br />

@@ -1,4 +1,4 @@
-angular.module("mnd.spritz", [])
+angular.module("mnd.sprinkle", [])
 
 .factory("MndWordProcessingService", function () {
 	var repeat = function (string, times) {
@@ -9,47 +9,56 @@ angular.module("mnd.spritz", [])
 		return result;
 	};
 	return function (word) {
-		var MAX_WORD_LENGTH = 27;
-		var ret = {};
-		var length = word.length;
-		if (length < 6) {
-			ret.leftPadding = repeat(".", Math.floor((MAX_WORD_LENGTH - length) / 2));
-			ret.rightPadding = repeat(".", Math.ceil((MAX_WORD_LENGTH - length) / 2));
+		var processed = {};
+		if (word.length === 2) {
+			processed.left = word[0];
+			processed.pivot = word[1];
+			processed.right = "";
 		} else {
-			ret.leftPadding = repeat(".", 10);
-			ret.rightPadding = repeat(".", MAX_WORD_LENGTH - (length + 10));
+			var pivotIndex = Math.ceil((word.length / 2) - 1);
+			processed.left = word.slice(0, pivotIndex);
+			processed.right = word.slice(pivotIndex + 1);
+			processed.pivot = word.slice(pivotIndex, pivotIndex + 1);
 		}
-		var pivotIndex = Math.ceil((length / 2) - 1);
-		ret.leftHand = word.slice(0, pivotIndex);
-		ret.rightHand = word.slice(pivotIndex + 1);
-		ret.pivotLetter = word.slice(pivotIndex, pivotIndex + 1);
-		return ret;
+		if (/[\,\:\;]$/g.test(word)) {
+			processed.multiplier = 1.5;
+		} else if (/[\.\!\?]$/g.test(word)) {
+			processed.multiplier = 2;
+		} else {
+			processed.multiplier = 1;
+		}
+		return processed;
 	};
 })
 
 .factory("MndWordSplittingService", function () {
 	return function (text) {
-		var MAX_WORD_LENGTH = 27;
 		var words = text.split(/\s+/);
-		console.log(words);
-		var tmpWords = [];
-		for (var i=0; i<words.length; i++){
-			tmpWords.push(words[i]);
-			if (  /[\,\:\-\(]/g.test(words[i])  &&  ! /\./g.test(words[i])  ) {
-				tmpWords.push(words[i]);
-			}
-			if (  /[\!\:\)\.\?\;]/g.test(words[i])  ) {
-				tmpWords.push("");
+		/*
+		var word;
+		var left;
+		var right;
+		var splitPoint;
+		for (var i=0; i<words.length; i++) {
+			word = words[i];
+			if (word.length > 13) {
+				splitPoint = Math.floor(word.length / 2);
+				left = word.slice(0, splitPoint) + "-";
+				right = word.slice(splitPoint);
+				words[i] = left;
+				words.splice(i+1, 0, right);
+				i++;
 			}
 		}
-		return tmpWords;
+	   */
+		return words;
 	};
 })
 
-.directive("mndSpritz", function ($interval, MndWordSplittingService, MndWordProcessingService) {
+.directive("mndSprinkle", function ($timeout, MndWordSplittingService, MndWordProcessingService) {
 	return {
 		restrict: "EA",
-		templateUrl: "spritz.html",
+		templateUrl: "templates/sprinkle.html",
 		scope: {
 			text: "@",
 			wpm: "@"
@@ -58,18 +67,23 @@ angular.module("mnd.spritz", [])
 			$scope._words = MndWordSplittingService($scope.text);
 			$scope._wordIndex = 0;
 			$scope._msPerWord = Math.floor(60000 / parseInt($scope.wpm, 10));
+
+			var next = function () {
+				var word = $scope._words[$scope._wordIndex];
+				var processed = MndWordProcessingService(word);
+				$scope.word = processed;
+				var delay = processed.multiplier * $scope._msPerWord;
+				$scope._wordIndex++;
+				if ($scope._wordIndex < $scope._words.length) {
+					$scope._timeout = $timeout(next, delay);
+				}
+			};
+
 			$scope.start = function () {
-				$scope._interval = $interval(function () {
-					var word = $scope._words[$scope._wordIndex];
-					$scope.word = MndWordProcessingService(word);
-					$scope._wordIndex++;
-					if ($scope._wordIndex >= $scope._words.length) {
-						$scope.stop();
-					}
-				}, $scope._msPerWord);
+				next();
 			};
 			$scope.pause = function () {
-				$interval.cancel($scope._interval);
+				$timeout.cancel($scope._timeout);
 			};
 			$scope.rewind = function () {
 				$scope._wordIndex = 0;

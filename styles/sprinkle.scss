@@ -1,95 +1,25 @@
-* {
-	font-family: monospace
-}
-#spray_holder{
-    width: 100%;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
-    background-color: #ffffff;
-    position: fixed;
-    z-index: 99999999999999999;
-}
-
-#spray_spacer{
-    width: 100%;
-}
-
-#spray_container{
-    background-color: #ffffff;
-}
-
-#spray_result{
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
-}
-
-#guide_top{
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
-    color: #DDDDDD;
-}
-
-#guide_bottom{
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
-    color: #DDDDDD;
-}
-
-#notch{
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
-    color: #DDDDDD;
-}
-
-#spray_credits{
-    float: right;
-    font-family: 'Droid Sans Mono', sans-serif;
-    font-size: 13px;
-}
-
-#spray_credits a{
-    color: #dddddd;
-    text-decoration: none;
-}
-
-#spray_selector{
-    float: left;
-    width: auto;
-}
-
-.invisible{
-    font-family: 'Droid Sans Mono', sans-serif;
-    color: #ffffff;
-}
-
-.spray_start{
+.spray-result {
+	position: relative;
+	width: 700px;
     color: #333333;
-    text-align: center;
     font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
+    font-family: monospace;
 }
-.spray_pivot{
+.spray-result span {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.spray-left {
+	float: left;
+	text-align: right;
+	width: 40%;
+}
+.spray-pivot {
+	float: left;
     color: #DE0000;
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
 }
-.spray_end{
-    color: #333333;
-    text-align: center;
-    font-size: 32px;
-    font-family: 'Droid Sans Mono', sans-serif;
+.spray-right {
+	float: left;
 }
-
-@media only screen and (max-device-width: 480px){
-    #spray_result, #guide_top, #guide_bottom, #notch, #spray_start, #spray_pivot, #spray_end{
-        font-size:14px;
-    }
-    .spray_start, .spray_pivot, .spray_end{
-        font-size:14px;
-    }
-}
-
