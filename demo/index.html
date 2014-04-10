@@ -4,11 +4,21 @@
 		<meta charset="UTF-8">
 		<title>Spritz Demo</title>
 		<link rel="stylesheet" type="text/css" href="dist/sprinkle.css" />
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script src="dist/sprinkle-tpls.js"></script>
 		<script src="index.js"></script>
 	</head>
 	<body ng-controller="MainController">
-		<div mnd-sprinkle text="{{text}}" wpm="{{wpm}}"></div>
+		<div mnd-sprinkle text="{{text}}" wpm="{{wpm}}" progress-percentage="prog"></div>
+		<br />
+		<br />
+		<button type="button" class="btn btn-default" ng-click="increaseSpeed()">Più veloce</button>
+		<button type="button" class="btn btn-default" ng-click="decreaseSpeed()">Più lento</button>
+		{{wpm}} wpm
+		<br />
+		<br />
+		<div class="col-sm-4"><progressbar value="prog"></progressbar></div>
 	</body>
 </html>

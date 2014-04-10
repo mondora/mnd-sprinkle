@@ -30,23 +30,6 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
 }).factory('MndWordSplittingService', function () {
   return function (text) {
     var words = text.split(/\s+/);
-    /*
-		var word;
-		var left;
-		var right;
-		var splitPoint;
-		for (var i=0; i<words.length; i++) {
-			word = words[i];
-			if (word.length > 13) {
-				splitPoint = Math.floor(word.length / 2);
-				left = word.slice(0, splitPoint) + "-";
-				right = word.slice(splitPoint);
-				words[i] = left;
-				words.splice(i+1, 0, right);
-				i++;
-			}
-		}
-	   */
     return words;
   };
 }).directive('mndSprinkle', [
@@ -59,27 +42,41 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
       templateUrl: 'templates/sprinkle.html',
       scope: {
         text: '@',
-        wpm: '@'
+        wpm: '@',
+        progressPercentage: '=?'
       },
       link: function ($scope) {
         $scope._words = MndWordSplittingService($scope.text);
         $scope._wordIndex = 0;
-        $scope._msPerWord = Math.floor(60000 / parseInt($scope.wpm, 10));
+        $scope._msPerWord = function () {
+          return Math.floor(60000 / parseInt($scope.wpm, 10));
+        };
         var next = function () {
           var word = $scope._words[$scope._wordIndex];
           var processed = MndWordProcessingService(word);
           $scope.word = processed;
-          var delay = processed.multiplier * $scope._msPerWord;
+          var delay = processed.multiplier * $scope._msPerWord();
           $scope._wordIndex++;
+          $scope.progressPercentage = $scope._wordIndex / $scope._words.length * 100;
           if ($scope._wordIndex < $scope._words.length) {
             $scope._timeout = $timeout(next, delay);
+          } else {
+            $scope.running = false;
+            $scope._wordIndex = 0;
           }
         };
+        $scope.running = false;
         $scope.start = function () {
+          if ($scope.running)
+            return;
+          $scope.running = true;
           next();
         };
         $scope.pause = function () {
+          if (!$scope.running)
+            return;
           $timeout.cancel($scope._timeout);
+          $scope.running = false;
         };
         $scope.rewind = function () {
           $scope._wordIndex = 0;
@@ -117,13 +114,13 @@ module.run(['$templateCache', function($templateCache) {
     '<br />\n' +
     '<br />\n' +
     '<br />\n' +
-    '<button ng-click="start()">Start</button>\n' +
-    '<br />\n' +
-    '<button ng-click="pause()">Pause</button>\n' +
-    '<br />\n' +
-    '<button ng-click="stop()">Stop</button>\n' +
-    '<br />\n' +
-    '<button ng-click="rewind()">Rewind</button>\n' +
+    '<button type="button" class="btn btn-default" ng-click="start()">Start</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="pause()">Pause</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="stop()">Stop</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="rewind()">Rewind</button>\n' +
     '');
 }]);
 })();

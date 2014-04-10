@@ -23,13 +23,13 @@ module.run(['$templateCache', function($templateCache) {
     '<br />\n' +
     '<br />\n' +
     '<br />\n' +
-    '<button ng-click="start()">Start</button>\n' +
-    '<br />\n' +
-    '<button ng-click="pause()">Pause</button>\n' +
-    '<br />\n' +
-    '<button ng-click="stop()">Stop</button>\n' +
-    '<br />\n' +
-    '<button ng-click="rewind()">Rewind</button>\n' +
+    '<button type="button" class="btn btn-default" ng-click="start()">Start</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="pause()">Pause</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="stop()">Stop</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="rewind()">Rewind</button>\n' +
     '');
 }]);
 })();
