@@ -51,20 +51,20 @@ angular.module("mnd.sprinkle", [])
 			$scope._words = MndWordSplittingService($scope.text);
 			$scope._wordIndex = 0;
 			$scope._msPerWord = function () {
-				return Math.floor(60000 / $scope._wpm);
+				return Math.floor(60000 / $scope.wpm);
 			};
 			$scope.increaseSpeed = function (n) {
-				var cur = $scope._wpm;
+				var cur = $scope.wpm;
 				cur += n || 50;
-				$scope._wpm = cur;
+				$scope.wpm = cur;
 			};
 			$scope.decreaseSpeed = function (n) {
-				var cur = $scope._wpm;
+				var cur = $scope.wpm;
 				cur -= n || 50;
 				if (cur < 50) cur = 50;
-				$scope._wpm = cur;
+				$scope.wpm = cur;
 			};
-			$scope._wpm = parseInt($scope.defaultWpm || "250", 10);
+			$scope.wpm = parseInt($scope.defaultWpm || "250", 10);
 			var next = function () {
 				var word = $scope._words[$scope._wordIndex];
 				var processed = MndWordProcessingService(word);

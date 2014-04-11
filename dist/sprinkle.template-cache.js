@@ -21,22 +21,23 @@ module.run(['$templateCache', function($templateCache) {
     '		</span>\n' +
     '	</div>\n' +
     '	<div class="sprinkle-control-bar">\n' +
-    '	<div class="sprinkle-control-bar-left">\n' +
-    '	<div class="sprinkle-control-btn" ng-click="rewind()"><i class="fa fa-fast-backward"></i></div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="stop()"><i class="fa fa-stop"></i></div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="pause()"><i class="fa fa-pause"></i></div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="start()"><i class="fa fa-play"></i></div>\n' +
-    '	</div>\n' +
-    '	<div class="sprinkle-control-bar-right">\n' +
-    '	<div class="sprinkle-control-btn" ng-click="decreaseSpeed()">-</div>\n' +
-    '	<div class="sprinkle-control-btn wpm-btn">{{wpm}} wpm </div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="increaseSpeed()">+</div>\n' +
-    '	</div>\n' +
+    '		<div class="sprinkle-control-bar-left">\n' +
+    '			<div class="sprinkle-control-btn" ng-click="rewind()"><i class="fa fa-fast-backward"></i></div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="stop()"><i class="fa fa-stop"></i></div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="pause()"><i class="fa fa-pause"></i></div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="start()"><i class="fa fa-play"></i></div>\n' +
+    '		</div>\n' +
+    '		<div class="sprinkle-control-bar-right">\n' +
+    '			<div class="sprinkle-control-btn" ng-click="decreaseSpeed()"><i class="fa fa-minus"></i></div>\n' +
+    '			<div class="sprinkle-control-btn wpm-btn">{{wpm}} wpm </div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="increaseSpeed()"><i class="fa fa-plus"></i></div>\n' +
+    '		</div>\n' +
     '	</div>\n' +
     '<br />\n' +
     '<br />\n' +
     '<br />\n' +
     '\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();

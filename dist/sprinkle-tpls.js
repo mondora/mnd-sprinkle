@@ -49,21 +49,21 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
         $scope._words = MndWordSplittingService($scope.text);
         $scope._wordIndex = 0;
         $scope._msPerWord = function () {
-          return Math.floor(60000 / $scope._wpm);
+          return Math.floor(60000 / $scope.wpm);
         };
         $scope.increaseSpeed = function (n) {
-          var cur = $scope._wpm;
+          var cur = $scope.wpm;
           cur += n || 50;
-          $scope._wpm = cur;
+          $scope.wpm = cur;
         };
         $scope.decreaseSpeed = function (n) {
-          var cur = $scope._wpm;
+          var cur = $scope.wpm;
           cur -= n || 50;
           if (cur < 50)
             cur = 50;
-          $scope._wpm = cur;
+          $scope.wpm = cur;
         };
-        $scope._wpm = parseInt($scope.defaultWpm || '250', 10);
+        $scope.wpm = parseInt($scope.defaultWpm || '250', 10);
         var next = function () {
           var word = $scope._words[$scope._wordIndex];
           var processed = MndWordProcessingService(word);
@@ -125,22 +125,23 @@ module.run(['$templateCache', function($templateCache) {
     '		</span>\n' +
     '	</div>\n' +
     '	<div class="sprinkle-control-bar">\n' +
-    '	<div class="sprinkle-control-bar-left">\n' +
-    '	<div class="sprinkle-control-btn" ng-click="rewind()"><i class="fa fa-fast-backward"></i></div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="stop()"><i class="fa fa-stop"></i></div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="pause()"><i class="fa fa-pause"></i></div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="start()"><i class="fa fa-play"></i></div>\n' +
-    '	</div>\n' +
-    '	<div class="sprinkle-control-bar-right">\n' +
-    '	<div class="sprinkle-control-btn" ng-click="decreaseSpeed()">-</div>\n' +
-    '	<div class="sprinkle-control-btn wpm-btn">{{wpm}} wpm </div>\n' +
-    '	<div class="sprinkle-control-btn" ng-click="increaseSpeed()">+</div>\n' +
-    '	</div>\n' +
+    '		<div class="sprinkle-control-bar-left">\n' +
+    '			<div class="sprinkle-control-btn" ng-click="rewind()"><i class="fa fa-fast-backward"></i></div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="stop()"><i class="fa fa-stop"></i></div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="pause()"><i class="fa fa-pause"></i></div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="start()"><i class="fa fa-play"></i></div>\n' +
+    '		</div>\n' +
+    '		<div class="sprinkle-control-bar-right">\n' +
+    '			<div class="sprinkle-control-btn" ng-click="decreaseSpeed()"><i class="fa fa-minus"></i></div>\n' +
+    '			<div class="sprinkle-control-btn wpm-btn">{{wpm}} wpm </div>\n' +
+    '			<div class="sprinkle-control-btn" ng-click="increaseSpeed()"><i class="fa fa-plus"></i></div>\n' +
+    '		</div>\n' +
     '	</div>\n' +
     '<br />\n' +
     '<br />\n' +
     '<br />\n' +
     '\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
