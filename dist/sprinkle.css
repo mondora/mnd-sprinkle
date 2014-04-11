@@ -1,23 +1,72 @@
 .spray-result {
   position: relative;
   width: 700px;
-  color: #333333;
-  font-size: 32px;
-  font-family: monospace; }
+  color: #fff;
+  font-size: 50px;
+  font-family: 'Cutive Mono';
+  min-height: 100px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-top: 3px solid #ffcc00;
+  z-index: 0; }
 
 .spray-result span {
   display: inline-block;
   margin: 0px;
-  padding: 0px; }
+  padding-top: 15px;
+  z-index: 10; }
+
+.sprinkle-center-line {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 332px;
+  height: 100%;
+  border-right: 2px solid #fff;
+  opacity: 0.4;
+  z-index: -11; }
 
 .spray-left {
   float: left;
   text-align: right;
-  width: 40%; }
+  width: 45%; }
 
 .spray-pivot {
   float: left;
-  color: #DE0000; }
+  color: #ffcc00; }
 
 .spray-right {
   float: left; }
+
+.sprinkle-control-bar {
+  background-color: #ffcc00;
+  height: 80px;
+  width: 700px;
+  padding: 10px 0; }
+
+.sprinkle-control-bar-left {
+  height: 60px;
+  width: 49%; }
+
+.sprinkle-control-bar-right {
+  height: 60px;
+  width: 49%; }
+
+.sprinkle-control-bar-right, .sprinkle-control-bar-left {
+  display: inline-block; }
+
+.sprinkle-control-btn {
+  color: #5e5f5f;
+  display: inline-block;
+  min-height: 60px;
+  min-width: 60px;
+  font-size: 40px;
+  margin: 0 5px;
+  border: 1px solid #5e5f5f;
+  border-radius: 10px;
+  text-align: center; }
+
+.sprinkle-control-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+.wpm-btn {
+  padding: 0 5px; }
