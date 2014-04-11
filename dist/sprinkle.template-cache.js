@@ -30,6 +30,12 @@ module.run(['$templateCache', function($templateCache) {
     '<button type="button" class="btn btn-default" ng-click="stop()">Stop</button>\n' +
     '&nbsp;\n' +
     '<button type="button" class="btn btn-default" ng-click="rewind()">Rewind</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="increaseSpeed()">Più veloce</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="decreaseSpeed()">Più lento</button>\n' +
+    '&nbsp;\n' +
+    '{{_wpm}} wpm\n' +
     '');
 }]);
 })();

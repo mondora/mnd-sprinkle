@@ -4,17 +4,4 @@ angular.module("SprinkleDemo", ["mnd.sprinkle", "ui.bootstrap"])
 
 .controller("MainController", function ($scope) {
 	$scope.text = lorem;
-	$scope.wpm = "250";
-	$scope.increaseSpeed = function (n) {
-		var cur = parseInt($scope.wpm, 10);
-		cur += n || 10;
-		$scope.wpm = cur.toString();
-	};
-	$scope.decreaseSpeed = function (n) {
-		var cur = parseInt($scope.wpm, 10);
-		cur -= n || 10;
-		if (cur < 10) cur = 10;
-		$scope.wpm = cur.toString();
-	};
 });
-

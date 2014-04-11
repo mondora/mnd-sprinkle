@@ -11,12 +11,7 @@
 		<script src="index.js"></script>
 	</head>
 	<body ng-controller="MainController">
-		<div mnd-sprinkle text="{{text}}" wpm="{{wpm}}" progress-percentage="prog"></div>
-		<br />
-		<br />
-		<button type="button" class="btn btn-default" ng-click="increaseSpeed()">Più veloce</button>
-		<button type="button" class="btn btn-default" ng-click="decreaseSpeed()">Più lento</button>
-		{{wpm}} wpm
+		<div mnd-sprinkle text="{{text}}" wpm="250" progress-percentage="prog"></div>
 		<br />
 		<br />
 		<div class="col-sm-4"><progressbar value="prog"></progressbar></div>

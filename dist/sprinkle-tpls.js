@@ -42,15 +42,28 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
       templateUrl: 'templates/sprinkle.html',
       scope: {
         text: '@',
-        wpm: '@',
+        defaultWpm: '@?',
         progressPercentage: '=?'
       },
       link: function ($scope) {
         $scope._words = MndWordSplittingService($scope.text);
         $scope._wordIndex = 0;
         $scope._msPerWord = function () {
-          return Math.floor(60000 / parseInt($scope.wpm, 10));
+          return Math.floor(60000 / $scope._wpm);
         };
+        $scope.increaseSpeed = function (n) {
+          var cur = $scope._wpm;
+          cur += n || 50;
+          $scope._wpm = cur;
+        };
+        $scope.decreaseSpeed = function (n) {
+          var cur = $scope._wpm;
+          cur -= n || 50;
+          if (cur < 50)
+            cur = 50;
+          $scope._wpm = cur;
+        };
+        $scope._wpm = parseInt($scope.defaultWpm || '250', 10);
         var next = function () {
           var word = $scope._words[$scope._wordIndex];
           var processed = MndWordProcessingService(word);
@@ -121,6 +134,12 @@ module.run(['$templateCache', function($templateCache) {
     '<button type="button" class="btn btn-default" ng-click="stop()">Stop</button>\n' +
     '&nbsp;\n' +
     '<button type="button" class="btn btn-default" ng-click="rewind()">Rewind</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="increaseSpeed()">Più veloce</button>\n' +
+    '&nbsp;\n' +
+    '<button type="button" class="btn btn-default" ng-click="decreaseSpeed()">Più lento</button>\n' +
+    '&nbsp;\n' +
+    '{{_wpm}} wpm\n' +
     '');
 }]);
 })();
