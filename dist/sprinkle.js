@@ -43,6 +43,8 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
       scope: {
         text: '@',
         defaultWpm: '@?',
+        autoplay: '@?',
+        autoplayDelay: '@?',
         progressPercentage: '=?'
       },
       link: function ($scope) {
@@ -98,6 +100,13 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
           $scope.pause();
           $scope.rewind();
         };
+        if ($scope.autoplay === 'true') {
+          var autoplayDelay = parseInt($scope.autoplayDelay, 10);
+          var delay = isNaN(autoplayDelay) ? 0 : autoplayDelay;
+          $timeout(function () {
+            $scope.start();
+          }, delay * 1000);
+        }
       }
     };
   }
