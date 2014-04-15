@@ -1,6 +1,6 @@
-.spray-result {
+.sprinkle-result {
   position: relative;
-  width: 700px;
+  width: 100%;
   color: #fff;
   font-size: 50px;
   font-family: 'Cutive Mono';
@@ -9,64 +9,93 @@
   border-top: 3px solid #ffcc00;
   z-index: 0; }
 
-.spray-result span {
+.sprinkle-result span {
   display: inline-block;
   margin: 0px;
   padding-top: 15px;
   z-index: 10; }
 
-.sprinkle-center-line {
+.sprinkle-center-line-top {
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 332px;
-  height: 100%;
+  width: 50%;
+  height: 25%;
   border-right: 2px solid #fff;
   opacity: 0.4;
   z-index: -11; }
 
-.spray-left {
+.sprinkle-center-line-center {
+  position: absolute;
+  top: 30%;
+  left: 0px;
+  width: 50%;
+  height: 50%; }
+
+.sprinkle-center-line-bottom {
+  position: absolute;
+  top: 75%;
+  left: 0px;
+  width: 50%;
+  height: 25%;
+  border-right: 2px solid #fff;
+  opacity: 0.4;
+  z-index: -11; }
+
+.sprinkle-left {
   float: left;
   text-align: right;
-  width: 45%; }
+  width: 50%; }
 
-.spray-pivot {
+.sprinkle-pivot {
+  position: relative;
   float: left;
   color: #ffcc00; }
 
-.spray-right {
+.sprinkle-right {
   float: left; }
+
+.sprinkle-left, .sprinkle-pivot, .sprinkle-right {
+  min-height: 98px; }
 
 .sprinkle-control-bar {
   background-color: #ffcc00;
   height: 80px;
-  width: 700px;
+  width: 100%;
   padding: 10px 0; }
 
 .sprinkle-control-bar-left {
   height: 60px;
-  width: 49%; }
+  width: 30%;
+  padding-left: 10px; }
 
 .sprinkle-control-bar-right {
   height: 60px;
-  width: 49%; }
+  width: 69%;
+  text-align: right;
+  padding-right: 10px; }
 
 .sprinkle-control-bar-right, .sprinkle-control-bar-left {
   display: inline-block; }
 
 .sprinkle-control-btn {
   color: #5e5f5f;
+  padding-left: 5px;
   display: inline-block;
-  min-height: 60px;
-  min-width: 60px;
   font-size: 40px;
-  margin: 0 5px;
-  border: 1px solid #5e5f5f;
-  border-radius: 10px;
+  border: none;
+  text-align: center; }
+
+.sprinkle-control-wpm {
+  color: #5e5f5f;
+  padding: 0 15px;
+  display: inline-block;
+  font-size: 40px;
+  border: none;
   text-align: center; }
 
 .sprinkle-control-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1); }
+  cursor: pointer; }
 
 .wpm-btn {
   padding: 0 5px; }
