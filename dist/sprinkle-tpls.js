@@ -148,10 +148,6 @@ module.run(['$templateCache', function($templateCache) {
     '			<div class="sprinkle-control-btn" ng-click="increaseSpeed()"><i class="fa fa-plus"></i></div>\n' +
     '		</div>\n' +
     '	</div>\n' +
-    '<br />\n' +
-    '<br />\n' +
-    '<br />\n' +
-    '\n' +
     '</div>\n' +
     '');
 }]);
