@@ -7,23 +7,21 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/sprinkle.html',
     '<div class="sprinkle-container">\n' +
-    '	<div class="sprinkle-result">\n' +
-    '		\n' +
+    '	<div class="sprinkle-result" ng-click="toggle();">\n' +
     '		<span class="sprinkle-left">\n' +
     '			&nbsp;\n' +
     '			{{word.left}}\n' +
     '		</span>\n' +
     '		<span class="sprinkle-pivot">\n' +
     '			<div class="sprinkle-center-line-top"></div>\n' +
-    '			<div class="sprinkle-center-line-center"></div>\n' +
     '			<div class="sprinkle-center-line-bottom"></div>	\n' +
-    '			{{word.pivot}}\n' +
+    '			{{word.pivot || "&nbsp;"}}\n' +
     '		</span>\n' +
     '		<span class="sprinkle-right">\n' +
     '			{{word.right}}\n' +
     '		</span>\n' +
     '	</div>\n' +
-    '	<div class="sprinkle-control-bar">\n' +
+    '	<div class="sprinkle-control-bar" ng-if="!hideControlBar">\n' +
     '		<div class="sprinkle-control-bar-left">\n' +
     '			<div class="sprinkle-control-btn" ng-click="rewind()"><i class="fa fa-refresh"></i></div>\n' +
     '			<div class="sprinkle-control-btn" ng-if="running" ng-click="pause()"><i class="fa fa-pause"></i></div>\n' +

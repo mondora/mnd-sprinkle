@@ -13,7 +13,8 @@
 		<script src="index.js"></script>
 	</head>
 	<body ng-controller="MainController">
-		<div mnd-sprinkle autoplay="true" autoplay-delay="5" text="{{text}}" defaultWpm="{{wpm}}" progress-percentage="prog"></div>
-		<div class="col-sm-4"><progressbar value="prog"></progressbar></div>
+		<div mnd-sprinkle html="{{text}}" defaultWpm="{{wpm}}" time="time" progress-percentage="prog"></div>
+		{{time}}
+		<!--<div class="col-sm-4"><progressbar value="prog"></progressbar></div>-->
 	</body>
 </html>

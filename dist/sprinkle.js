@@ -29,27 +29,62 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
   };
 }).factory('MndWordSplittingService', function () {
   return function (text) {
-    var words = text.split(/\s+/);
+    var words = text.split(' ');
     return words;
   };
-}).directive('mndSprinkle', [
+}).factory('MndTagStrippingService', function () {
+  return function (html) {
+    var strippedText = html.replace(/(<([^>]+)>)/gi, ' ');
+    strippedText = strippedText.replace(/\s+/g, ' ').trim();
+    var p = document.createElement('p');
+    p.innerHTML = strippedText;
+    return p.textContent;
+  };
+}).factory('MndReadTimeEstimatingService', [
+  'MndTagStrippingService',
+  function (MndTagStrippingService) {
+    return function (wordCount, readingSpeed) {
+      return Math.round(wordCount / readingSpeed);
+    };
+  }
+]).directive('mndSprinkle', [
   '$timeout',
   'MndWordSplittingService',
   'MndWordProcessingService',
-  function ($timeout, MndWordSplittingService, MndWordProcessingService) {
+  'MndTagStrippingService',
+  'MndReadTimeEstimatingService',
+  function ($timeout, MndWordSplittingService, MndWordProcessingService, MndTagStrippingService, MndReadTimeEstimatingService) {
     return {
       restrict: 'EA',
       templateUrl: 'templates/sprinkle.html',
       scope: {
-        text: '@',
+        text: '@?',
+        html: '@?',
         defaultWpm: '@?',
+        wpm: '=?',
+        time: '=?',
+        hideControlBar: '=?',
         autoplay: '@?',
         autoplayDelay: '@?',
         progressPercentage: '=?'
       },
       link: function ($scope) {
-        $scope._words = MndWordSplittingService($scope.text);
-        $scope._wordIndex = 0;
+        ////////////////////////////////
+        // Parse the text to sprinkle //
+        ////////////////////////////////
+        if ($scope.text) {
+          $scope._words = MndWordSplittingService($scope.text);
+        } else if ($scope.html) {
+          $scope._text = MndTagStrippingService($scope.html);
+          $scope._words = MndWordSplittingService($scope._text);
+        } else {
+          throw new Error('Nothing to display!');
+        }
+        //////////////////////////////////////////
+        // Speed-related properties and methods //
+        //////////////////////////////////////////
+        $scope.wpm = $scope.wpm || parseInt($scope.defaultWpm || '250', 10);
+        $scope.time = MndReadTimeEstimatingService($scope._words.length, $scope.wpm);
         $scope._msPerWord = function () {
           return Math.floor(60000 / $scope.wpm);
         };
@@ -57,6 +92,7 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
           var cur = $scope.wpm;
           cur += n || 50;
           $scope.wpm = cur;
+          $scope.time = MndReadTimeEstimatingService($scope._words.length, $scope.wpm);
         };
         $scope.decreaseSpeed = function (n) {
           var cur = $scope.wpm;
@@ -64,8 +100,8 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
           if (cur < 50)
             cur = 50;
           $scope.wpm = cur;
+          $scope.time = MndReadTimeEstimatingService($scope._words.length, $scope.wpm);
         };
-        $scope.wpm = parseInt($scope.defaultWpm || '250', 10);
         var next = function () {
           var word = $scope._words[$scope._wordIndex];
           var processed = MndWordProcessingService(word);
@@ -80,7 +116,11 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
             $scope._wordIndex = 0;
           }
         };
+        //////////////////////////////////////////
+        // Status-related properties and methods //
+        //////////////////////////////////////////
         $scope.running = false;
+        $scope._wordIndex = 0;
         $scope.start = function () {
           if ($scope.running)
             return;
@@ -92,6 +132,13 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
             return;
           $timeout.cancel($scope._timeout);
           $scope.running = false;
+        };
+        $scope.toggle = function () {
+          if ($scope.running) {
+            $scope.pause();
+          } else {
+            $scope.start();
+          }
         };
         $scope.rewind = function () {
           $scope._wordIndex = 0;
@@ -107,6 +154,12 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
             $scope.start();
           }, delay * 1000);
         }
+        /////////////////
+        // Control bar //
+        /////////////////
+        $scope.toggleControlBar = function () {
+          $scope.hideControlBar = !$scope.hideControlBar;
+        };
       }
     };
   }
