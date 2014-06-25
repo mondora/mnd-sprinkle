@@ -119,9 +119,11 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
         //////////////////////////////////////////
         // Status-related properties and methods //
         //////////////////////////////////////////
+        $scope.neverRun = true;
         $scope.running = false;
         $scope._wordIndex = 0;
         $scope.start = function () {
+          $scope.neverRun = false;
           if ($scope.running)
             return;
           $scope.running = true;

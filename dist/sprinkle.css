@@ -41,6 +41,11 @@
 .sprinkle-right {
   float: left; }
 
+.sprinkle-never-run {
+  position: absolute;
+  text-align: center;
+  width: 100%; }
+
 .sprinkle-center-line-top {
   position: absolute;
   top: 0px;

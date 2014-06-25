@@ -8,6 +8,9 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/sprinkle.html',
     '<div class="sprinkle-container">\n' +
     '	<div class="sprinkle-result" ng-click="toggle();">\n' +
+    '		<span ng-if="neverRun" class="sprinkle-never-run">\n' +
+    '			tap to start reading\n' +
+    '		</span>\n' +
     '		<span class="sprinkle-left">\n' +
     '			&nbsp;\n' +
     '			{{word.left}}\n' +
