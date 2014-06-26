@@ -73,6 +73,7 @@ angular.module("mnd.sprinkle", [])
 			hideControlBar: "=?",
 			autoplay: "@?",
 			autoplayDelay: "@?",
+			initText: "@?",
 			progressPercentage: "=?"
 		},
 		link: function ($scope) {

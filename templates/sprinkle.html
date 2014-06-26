@@ -1,7 +1,7 @@
 <div class="sprinkle-container">
 	<div class="sprinkle-result" ng-click="toggle();">
 		<span ng-if="neverRun" class="sprinkle-never-run">
-			tap to start reading
+			{{initText || "&nbsp;tap to start"}}
 		</span>
 		<span class="sprinkle-left">
 			&nbsp;

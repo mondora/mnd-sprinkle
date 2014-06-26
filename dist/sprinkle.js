@@ -66,6 +66,7 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
         hideControlBar: '=?',
         autoplay: '@?',
         autoplayDelay: '@?',
+        initText: '@?',
         progressPercentage: '=?'
       },
       link: function ($scope) {

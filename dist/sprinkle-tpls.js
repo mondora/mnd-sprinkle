@@ -66,6 +66,7 @@ angular.module('mnd.sprinkle', []).factory('MndWordProcessingService', function 
         hideControlBar: '=?',
         autoplay: '@?',
         autoplayDelay: '@?',
+        initText: '@?',
         progressPercentage: '=?'
       },
       link: function ($scope) {
@@ -177,7 +178,7 @@ module.run(['$templateCache', function($templateCache) {
     '<div class="sprinkle-container">\n' +
     '	<div class="sprinkle-result" ng-click="toggle();">\n' +
     '		<span ng-if="neverRun" class="sprinkle-never-run">\n' +
-    '			tap to start reading\n' +
+    '			{{initText || "&nbsp;tap to start"}}\n' +
     '		</span>\n' +
     '		<span class="sprinkle-left">\n' +
     '			&nbsp;\n' +
